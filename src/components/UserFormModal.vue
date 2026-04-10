@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
-import { required, email, minLength } from '@vuelidate/validators'
+import { required, email, minLength, maxLength, helpers } from '@vuelidate/validators'
 import {
   Dialog,
   DialogContent,
@@ -32,10 +32,23 @@ const state = ref({
 })
 
 const rules = {
-  name: { required, minLength: minLength(3) },
-  username: { required, minLength: minLength(3) },
-  email: { required, email },
-  phone: { required }
+  name: {
+    required: helpers.withMessage('El nombre es obligatorio.', required),
+    minLength: helpers.withMessage('Debe tener al menos 3 caracteres.', minLength(3))
+  },
+  username: {
+    required: helpers.withMessage('El usuario es obligatorio.', required),
+    minLength: helpers.withMessage('Debe tener al menos 3 caracteres.', minLength(3))
+  },
+  email: {
+    required: helpers.withMessage('El correo electrónico es obligatorio.', required),
+    email: helpers.withMessage('Debe ser un correo electrónico válido.', email)
+  },
+  phone: {
+    required: helpers.withMessage('El teléfono es obligatorio.', required),
+    minLength: helpers.withMessage('Debe tener al menos 7 números.', minLength(7)),
+    maxLength: helpers.withMessage('No debe exceder 15 números.', maxLength(15))
+  }
 }
 
 const v$ = useVuelidate(rules, state)
