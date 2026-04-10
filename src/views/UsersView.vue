@@ -60,7 +60,7 @@ const onConfirmDelete = () => {
   <div class="max-w-6xl mx-auto p-6 md:p-10 animate-in fade-in duration-500">
     <div class="flex justify-between items-center mb-8">
       <div>
-        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Usuarios</h1>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Usuarios</h1>
         <p class="text-slate-500 mt-1">Administra tus usuarios y su información.</p>
       </div>
       <Button @click="openAddModal" class="gap-2 shadow-sm font-semibold">
@@ -77,7 +77,7 @@ const onConfirmDelete = () => {
 
     <!-- State: Error -->
     <div v-else-if="usersStore.error" class="p-6 bg-red-50 text-red-600 rounded-xl border border-red-200 shadow-sm">
-      <p class="font-medium text-lg">Falló a cargar la lista de usuarios</p>
+      <p class="font-medium text-lg">Falló al cargar la lista de usuarios</p>
       <p class="text-sm mt-1">{{ usersStore.error }}</p>
     </div>
 
@@ -86,11 +86,11 @@ const onConfirmDelete = () => {
       <Table>
         <TableHeader>
           <TableRow class="bg-slate-50/80 hover:bg-slate-50/80">
-            <TableHead class="font-semibold text-slate-700 w-[20%]">Nombre</TableHead>
-            <TableHead class="font-semibold text-slate-700 w-[20%]">Usuario</TableHead>
-            <TableHead class="font-semibold text-slate-700 w-[25%]">Correo electrónico</TableHead>
-            <TableHead class="font-semibold text-slate-700 w-[20%]">Teléfono</TableHead>
-            <TableHead class="text-right font-semibold text-slate-700 w-[15%]">Acciones</TableHead>
+            <TableHead class="font-semibold text-slate-700">Nombre</TableHead>
+            <TableHead class="font-semibold text-slate-700">Usuario</TableHead>
+            <TableHead class="font-semibold text-slate-700">Correo electrónico</TableHead>
+            <TableHead class="font-semibold text-slate-700">Teléfono</TableHead>
+            <TableHead class="text-right font-semibold text-slate-700">Acciones</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -101,7 +101,7 @@ const onConfirmDelete = () => {
             <TableCell class="text-slate-600">{{ user.phone }}</TableCell>
             <TableCell class="text-right">
               <div class="flex justify-end gap-1">
-                <Button variant="ghost" size="icon" class="h-8 w-8 text-blue-600 hover:bg-blue-50 hover:text-blue-700 transition-colors" @click="openEditModal(user)" title="Editar Usuario">
+                <Button variant="ghost" size="icon" class="h-8 w-8 text-green-600 hover:bg-green-50 hover:text-green-700 transition-colors" @click="openEditModal(user)" title="Editar Usuario">
                   <EditIcon class="w-4 h-4" />
                 </Button>
                 <Button variant="ghost" size="icon" class="h-8 w-8 text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors" @click="openDeleteModal(user.id)" title="Eliminar Usuario">
@@ -120,6 +120,10 @@ const onConfirmDelete = () => {
           </TableRow>
         </TableBody>
       </Table>
+
+      <div class="flex items-center justify-between px-6 py-3 border-t border-slate-200 bg-slate-50/50">
+        <p class="text-sm text-slate-500">Total de usuarios: {{ usersStore.users.length }}</p>
+      </div>
     </div>
 
     <UserFormModal
