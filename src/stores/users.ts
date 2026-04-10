@@ -1,14 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { fetchUsers as fetchUsersApi } from '@/services/usersService'
-
-export interface User {
-  id: number
-  name: string
-  username: string
-  email: string
-  phone: string
-}
+import type { User } from '@/types/usersTypes'
 
 export const useUsersStore = defineStore('users', () => {
   const users = ref<User[]>([])
